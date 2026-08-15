@@ -1,0 +1,107 @@
+@{
+    ViewData["Title"] = "Tú và Quân";
+}
+
+<div id="app" class="app-shell">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Bật giao diện tối" title="Đổi giao diện">☾</button>
+    <div id="backgroundLayer" class="background-layer is-hidden" aria-hidden="true"></div>
+    <div id="petalLayer" class="petal-layer is-hidden" aria-hidden="true"></div>
+    <section id="authScreen" class="auth-screen">
+        <div class="auth-card">
+            <div class="auth-tabs" role="tablist">
+                <button class="auth-tab is-active" type="button" data-auth-tab="login">Đăng nhập</button>
+                <button class="auth-tab" type="button" data-auth-tab="register">Đăng ký</button>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <label>Tên đăng nhập<input id="loginUsername" autocomplete="username" required placeholder="Ví dụ: lamquan" /></label>
+                <label>Mật khẩu<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="••••••••" /></label>
+                <label class="love-question">Anh có yêu Tú không?<input id="loveAnswer" required placeholder="Nhập: Có" /></label>
+                <p id="loginMessage" class="form-message" aria-live="polite"></p>
+                <button class="button button-primary" type="submit">Vào hòm thư <span>→</span></button>
+            </form>
+
+            <form id="registerForm" class="auth-form is-hidden">
+                <label>Tên hiển thị<input id="registerDisplayName" required maxlength="60" placeholder="Tên bạn muốn mọi người nhìn thấy" /></label>
+                <label>Tên đăng nhập<input id="registerUsername" autocomplete="username" required minlength="3" placeholder="Tối thiểu 3 ký tự" /></label>
+                <label>Mật khẩu<input id="registerPassword" type="password" autocomplete="new-password" required minlength="4" placeholder="Tối thiểu 4 ký tự" /></label>
+                <p id="registerMessage" class="form-message" aria-live="polite"></p>
+                <button class="button button-primary" type="submit">Tạo hòm thư <span>→</span></button>
+            </form>
+        </div>
+    </section>
+
+    <section id="mailScreen" class="mail-screen is-hidden">
+        <header class="topbar">
+            <img class="site-logo" src="/images/logo.png" alt="Tú và Quân" />
+            <div class="header-actions">
+                <button id="notificationButton" class="icon-button" type="button" title="Bật thông báo" aria-label="Bật thông báo">♧</button>
+                <button id="profileButton" class="profile-button" type="button"><span id="profileAvatar"><b id="profileInitial">T</b></span><b id="profileName">Tú</b>⌄</button>
+                <div id="profileMenu" class="profile-menu is-hidden">
+                    <button id="adminMenuItem" class="is-hidden" type="button" data-action="admin">Quản lý người dùng</button>
+                    <button type="button" data-action="edit-profile">Chỉnh sửa thông tin</button>
+                    <button type="button" data-action="logout">Đăng xuất</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="mail-content">
+            <button id="composeButton" class="button button-primary compose-button" type="button"><span>＋</span> Gửi thư</button>
+
+            <div class="mailbox-grid">
+                <div class="mailbox mailbox-love">
+                    <label class="mailbox-icon mailbox-image-picker" title="Chọn ảnh cho hòm tiếng yêu"><img id="loveMailboxImage" class="is-hidden" alt="Ảnh hòm tiếng yêu" /><span>♡</span><input id="loveMailboxUpload" data-mailbox-upload="love" type="file" accept="image/png,image/jpeg,image/webp" /></label><button class="clear-mailbox-image is-hidden" data-clear-mailbox="love" type="button" aria-label="Xoá ảnh hòm tiếng yêu">×</button>
+                    <button class="mailbox-open" type="button" data-mailbox="love"><span class="mailbox-copy"><strong>Tiếng yêu này<br />anh dịch được không?</strong><em id="loveCount">0 thư mới</em></span><span class="mailbox-arrow">→</span></button>
+                </div>
+                <div class="mailbox mailbox-roast">
+                    <label class="mailbox-icon mailbox-image-picker" title="Chọn ảnh cho hòm thư chửi"><img id="roastMailboxImage" class="is-hidden" alt="Ảnh hòm thư chửi" /><span>☄</span><input id="roastMailboxUpload" data-mailbox-upload="roast" type="file" accept="image/png,image/jpeg,image/webp" /></label><button class="clear-mailbox-image is-hidden" data-clear-mailbox="roast" type="button" aria-label="Xoá ảnh hòm thư chửi">×</button>
+                    <button class="mailbox-open" type="button" data-mailbox="roast"><span class="mailbox-copy"><strong>Tao đang chửi mày đây,<br />vô mà đọc</strong><em id="roastCount">0 thư mới</em></span><span class="mailbox-arrow">→</span></button>
+                </div>
+            </div>
+            <div class="history-actions">
+                <button class="history-button" type="button" data-history="received">Xem lại tất cả thư đã nhận</button>
+                <button class="history-button" type="button" data-history="sent">Xem lại thư đã gửi</button>
+            </div>
+        </main>
+    </section>
+</div>
+
+<div id="modal" class="modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+        <button id="closeModal" class="close-button" type="button" aria-label="Đóng">×</button>
+        <div id="composeView">
+            <h2 id="modalTitle">Gửi thư</h2>
+            <form id="composeForm" class="modal-form">
+                <label>Gửi đến<input id="recipient" required placeholder="Username người nhận" /></label>
+                <label>Loại thư
+                    <select id="letterType"><option value="love">Tiếng yêu</option><option value="roast">Tao muốn chửi mày</option></select>
+                </label>
+                <label>Nội dung<textarea id="letterContent" required maxlength="1000" placeholder="Viết điều bạn muốn nói..." rows="6"></textarea></label>
+                <p id="composeMessage" class="form-message" aria-live="polite"></p>
+                <button class="button button-primary" type="submit">Gửi lá thư <span>➜</span></button>
+            </form>
+        </div>
+        <div id="inboxView" class="is-hidden">
+            <h2 id="inboxTitle">Thư</h2>
+            <div id="letterList" class="letter-list"></div>
+        </div>
+        <div id="editProfileView" class="is-hidden">
+            <p class="eyebrow">CÁ NHÂN</p><h2>Chỉnh sửa thông tin</h2>
+            <form id="profileForm" class="modal-form">
+                <label>Tên hiển thị<input id="displayName" required maxlength="30" /></label>
+                <label>Ảnh đại diện<input id="avatarUpload" type="file" accept="image/*" /></label>
+                <img id="avatarPreview" class="avatar-preview is-hidden" alt="Xem trước ảnh đại diện" />
+                <label>Hình nền mờ<input id="backgroundUpload" type="file" accept="image/png,image/jpeg,image/webp" /></label>
+                <div id="backgroundPreview" class="background-preview is-hidden" aria-label="Xem trước hình nền"></div>
+                <button id="clearBackground" class="text-button is-hidden" type="button">Bỏ hình nền</button>
+                <p id="profileMessage" class="form-message" aria-live="polite"></p>
+                <button class="button button-primary" type="submit">Lưu thay đổi</button>
+            </form>
+        </div>
+        <div id="adminView" class="is-hidden">
+            <p class="eyebrow">QUẢN TRỊ</p><h2>Người dùng</h2>
+            <p class="admin-note">Quản lý trạng thái tài khoản. Nội dung thư vẫn là riêng tư.</p>
+            <div id="adminUserList" class="admin-user-list"></div>
+        </div>
+    </div>
+</div>

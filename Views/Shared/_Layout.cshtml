@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#d55c75" />
+    <meta name="description" content="Hòm thư riêng của Tú và Quân" />
+    <link rel="manifest" href="~/manifest.json" />
+    <link rel="apple-touch-icon" href="~/images/icon-192.png" />
+    <title>@ViewData["Title"] - @ViewData["AppName"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/logo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/mailbox-images.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dark-mode.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/letter-sender.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/background-image.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+    @Html.AntiForgeryToken()
+    <main role="main">@RenderBody()</main>
+    <footer>web này được làm ra bởi bồ của Lâm Quân · Instagram: <a href="https://instagram.com/73.7kilo" target="_blank" rel="noopener noreferrer">73.7kilo</a></footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
