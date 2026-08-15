@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace guithu.Controllers;
 
 [Authorize]
-public class LettersController(AppDbContext database, guithu.Services.PushNotificationService push) : ApiControllerBase
+public class LettersController(AppDbContext database, guithu.Services.PushNotificationService push, ILogger<LettersController> logger) : ApiControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<LetterDto>>> List(string folder = "received", string? type = null, bool unreadOnly = false)
@@ -33,7 +33,15 @@ public class LettersController(AppDbContext database, guithu.Services.PushNotifi
         await database.SaveChangesAsync();
         await database.Entry(letter).Reference(item => item.Sender).LoadAsync();
         await database.Entry(letter).Reference(item => item.Recipient).LoadAsync();
-        await push.SendLetterNotification(letter.Recipient, letter.Sender, letter.Type);
+        // Push là tính năng bổ sung: bất kỳ lỗi thiết bị nào cũng không được phép làm mất lá thư.
+        try
+        {
+            await push.SendLetterNotification(letter.Recipient, letter.Sender, letter.Type);
+        }
+        catch (Exception exception)
+        {
+            logger.LogWarning(exception, "Không gửi được push notification cho thư {LetterId}", letter.Id);
+        }
         return Ok(ToDto(letter));
     }
 

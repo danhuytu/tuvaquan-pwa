@@ -82,8 +82,10 @@ public class AuthController(AppDbContext database) : ApiControllerBase
         return Ok(ToDto(user));
     }
 
-    private async Task SignIn(AppUser user) => await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-        new ClaimsPrincipal(new ClaimsIdentity([new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), new Claim(ClaimTypes.Name, user.Username), ..(user.IsAdmin ? new[] { new Claim(ClaimTypes.Role, "Admin") } : [])], CookieAuthenticationDefaults.AuthenticationScheme)));
+    private async Task SignIn(AppUser user) => await HttpContext.SignInAsync(
+        CookieAuthenticationDefaults.AuthenticationScheme,
+        new ClaimsPrincipal(new ClaimsIdentity([new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), new Claim(ClaimTypes.Name, user.Username), ..(user.IsAdmin ? new[] { new Claim(ClaimTypes.Role, "Admin") } : [])], CookieAuthenticationDefaults.AuthenticationScheme)),
+        new AuthenticationProperties { IsPersistent = true, ExpiresUtc = DateTimeOffset.UtcNow.AddDays(14) });
     private static string NormalizeUsername(string? value) => value?.Trim().ToLowerInvariant() ?? string.Empty;
     private static UserDto ToDto(AppUser user) => new(user.Username, user.DisplayName, user.AvatarDataUrl, user.LoveMailboxImage, user.RoastMailboxImage, user.BackgroundImage, user.IsAdmin);
     private static bool IsSafeImageOrEmpty(string? value) => string.IsNullOrEmpty(value) || IsSafeAvatar(value);
