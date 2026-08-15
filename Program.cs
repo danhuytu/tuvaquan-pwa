@@ -18,8 +18,11 @@ builder.Services.AddControllersWithViews(options => options.Filters.Add(new Micr
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(postgresConnection));
 builder.Services.AddScoped<PushNotificationService>();
 var dataProtectionPath = builder.Configuration["DataProtection:KeysPath"];
+var dataProtection = builder.Services.AddDataProtection().SetApplicationName("TuVaQuan");
 if (!string.IsNullOrWhiteSpace(dataProtectionPath))
-    builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(dataProtectionPath)).SetApplicationName("TuVaQuan");
+    dataProtection.PersistKeysToFileSystem(new DirectoryInfo(dataProtectionPath));
+else
+    dataProtection.PersistKeysToDbContext<AppDbContext>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
