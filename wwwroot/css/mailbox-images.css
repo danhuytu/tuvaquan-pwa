@@ -1,0 +1,8 @@
+.mailbox-image-picker { position: relative; overflow: hidden; cursor: pointer; }
+.mailbox-image-picker input { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; pointer-events: none; }
+.mailbox-image-picker img { width: 100%; height: 100%; object-fit: cover; }
+.mailbox-image-picker:has(img:not(.is-hidden)) > span { display: none; }
+.mailbox-open { display: flex; flex: 1; align-items: center; gap: 1rem; min-width: 0; border: 0; padding: 0; background: transparent; text-align: left; color: inherit; }
+.mailbox-open .mailbox-arrow { margin-left: auto; }
+.mailbox { position: relative; }
+.clear-mailbox-image { position: absolute; top: .55rem; left: .55rem; z-index: 1; width: 21px; height: 21px; border: 0; border-radius: 50%; background: #181216d9; color: white; font-size: 1rem; line-height: 1; }

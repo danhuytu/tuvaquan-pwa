@@ -1,0 +1,30 @@
+.theme-toggle { position: fixed; z-index: 20; top: 1.2rem; left: 1.2rem; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #dfcfd4; border-radius: 50%; background: #fffdfb; color: #1a1316; font-size: 1.2rem; box-shadow: 0 5px 15px #32161f12; }
+.petal-layer { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.auth-screen, .mail-screen { position: relative; z-index: 1; }
+.petal { position: absolute; top: -12vh; width: 13px; height: 18px; border-radius: 100% 0 100% 0; background: #e34269; box-shadow: 0 0 10px #e3426955; animation: petal-fall var(--fall-duration) linear var(--fall-delay) infinite, petal-sway var(--sway-duration) ease-in-out var(--fall-delay) infinite alternate; }
+@keyframes petal-fall { to { transform: translateY(120vh) rotate(540deg); } }
+@keyframes petal-sway { from { margin-left: -3vw; } to { margin-left: 4vw; } }
+
+body.dark-mode { --ink: #fff8fa; --muted: #c7b3ba; --paper: #090708; --rose: #ec5d81; --rose-dark: #ff7697; --pink: #30131c; --line: #3d2930; --shadow: 0 25px 70px #00000077; background: #090708; color: #fff8fa; }
+body.dark-mode:before { display: none; }
+body.dark-mode .theme-toggle { border-color: #70404d; background: #1b1014; color: #ff9cb3; box-shadow: 0 4px 18px #0009; }
+body.dark-mode .auth-card, body.dark-mode .modal-card { background: #151013; border-color: #3d2930; box-shadow: 0 25px 70px #000a; }
+body.dark-mode .topbar { background: #100b0e; border-color: #35252a; }
+body.dark-mode input, body.dark-mode textarea, body.dark-mode select { background: #1b1417; color: #fff8fa; border-color: #483239; }
+body.dark-mode .love-question { background: #281017; color: #ff98ae; }
+body.dark-mode .button-primary { background: #ec5d81; color: #200a10; box-shadow: 0 7px 18px #e3426940; }
+body.dark-mode .button-primary:hover { background: #ff8aa7; }
+body.dark-mode .icon-button, body.dark-mode .history-button { background: #171014; color: #fff8fa; border-color: #49323a; }
+body.dark-mode .profile-button>span { background: #ec5d81; color: #240a10; }
+body.dark-mode .profile-menu { background: #171014; border-color: #49323a; }
+body.dark-mode .profile-menu button { color: #fff8fa; }
+body.dark-mode .mailbox { box-shadow: 0 12px 30px #0007; }
+body.dark-mode .mailbox-love { background: #2a1119; border-color: #713142; }
+body.dark-mode .mailbox-roast { background: #151014; border-color: #48323a; }
+body.dark-mode .mailbox-love .mailbox-icon { background: #572333; color: #ff94ac; }
+body.dark-mode .mailbox-roast .mailbox-icon { background: #050405; color: #ff8da8; }
+body.dark-mode .mailbox-arrow { color: #ffc5d1; }
+body.dark-mode .history-button:hover { background: #ec5d81; color: #260a11; border-color: #ec5d81; }
+body.dark-mode .letter { background: #1b1417; border-color: #48323a; }
+body.dark-mode .empty-state, body.dark-mode footer { color: #c7b3ba; }
+@media (prefers-reduced-motion: reduce) { .petal { animation: none; } }

@@ -1,0 +1,7 @@
+.letter-person { display: flex; align-items: center; gap: .55rem; }
+.letter-person > span { display: grid; gap: .16rem; }
+.letter-person small { color: #a55a6c; font-size: .68rem; font-weight: 500; }
+.letter-person small:has(+ *) { color: #a55a6c; }
+.letter-avatar { display: grid; flex: 0 0 32px; place-items: center; width: 32px; height: 32px; overflow: hidden; border-radius: 50%; background: #f4dce2; color: #9e4058; font-style: normal; }
+.letter-avatar img { width: 100%; height: 100%; object-fit: cover; }
+body.dark-mode .letter-avatar { background: #5a2332; color: #ff9ab0; }

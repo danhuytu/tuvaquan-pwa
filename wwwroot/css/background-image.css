@@ -1,0 +1,6 @@
+.background-layer { position: fixed; inset: -14px; z-index: 0; pointer-events: none; background-position: center; background-size: cover; filter: blur(6px) saturate(.9); opacity: .38; transform: scale(1.02); }
+.auth-screen, .mail-screen { position: relative; z-index: 1; }
+.background-preview { height: 82px; border: 1px solid #e4d5da; border-radius: 9px; background-position: center; background-size: cover; opacity: .75; }
+.text-button { justify-self: start; border: 0; padding: 0; background: transparent; color: #b54260; font-size: .78rem; font-weight: 700; text-decoration: underline; }
+body.dark-mode .background-layer { opacity: .32; filter: blur(8px) saturate(.75) brightness(.62); }
+body.dark-mode .background-preview { border-color: #513640; }

@@ -1,0 +1,11 @@
+.admin-note { margin: -1rem 0 1.25rem; color: var(--muted); font-size: .84rem; }
+.admin-user-list { display: grid; gap: .65rem; }
+.admin-user { display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: center; padding: .85rem; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+.admin-user strong, .admin-user small { display: block; }
+.admin-user small { margin-top: .16rem; color: #85747a; font-size: .72rem; }
+.admin-status { color: #377d57; font-weight: 700; }
+.admin-status.is-banned { color: #bd3f5d; }
+.ban-button { border: 1px solid #d9c7cd; border-radius: 6px; padding: .45rem .6rem; background: white; color: #803147; font-size: .75rem; font-weight: 700; }
+.ban-button:hover { border-color: #b33d58; background: #fff0f3; }
+body.dark-mode .admin-user { background: #1b1417; }
+body.dark-mode .ban-button { background: #21171b; border-color: #593a44; color: #ff9ab0; }

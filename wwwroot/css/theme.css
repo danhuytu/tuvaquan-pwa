@@ -1,0 +1,42 @@
+:root {
+  --ink: #171216;
+  --muted: #766a70;
+  --paper: #fffcfb;
+  --rose: #c84f6a;
+  --rose-dark: #a9324f;
+  --pink: #f8e6eb;
+  --lavender: #f3edef;
+  --line: #eadde1;
+  --shadow: 0 22px 60px #24131812;
+}
+
+body { background: var(--paper); }
+body:before { display: none; }
+.auth-card, .modal-card { border-color: #e4d9dc; box-shadow: 0 22px 60px #1b111417; }
+.topbar { background: #fff; border-color: #e9dde0; }
+.button-primary { background: var(--ink); box-shadow: 0 7px 15px #17121624; }
+.button-primary:hover { background: var(--rose); }
+.auth-tab.is-active { color: var(--rose); border-color: var(--rose); }
+.love-question { background: #fff4f6; color: #9f3d56; }
+input:focus, textarea:focus, select:focus { border-color: var(--rose); box-shadow: 0 0 0 3px #c84f6a20; }
+.icon-button { color: var(--ink); border-color: #e2d5d9; }
+.profile-button>span { background: var(--ink); color: white; }
+.profile-menu button:hover { background: var(--pink); }
+
+.mailbox { border-color: #e9dde0; box-shadow: 0 9px 20px #1c111507; }
+.mailbox-love { background: #fff3f5; border-color: #edc9d2; }
+.mailbox-roast { background: #fff; border-color: #dcd1d5; }
+.mailbox-love .mailbox-icon { background: #f4d6de; color: var(--rose); }
+.mailbox-roast .mailbox-icon { background: var(--ink); color: #f6dce3; }
+.mailbox-copy em { color: var(--rose); }
+.mailbox-arrow { color: #23191d; }
+.history-button { background: white; color: var(--ink); border-color: #ddcfd4; }
+.history-button:hover { background: var(--ink); color: white; border-color: var(--ink); }
+.mailbox-image-picker { outline: 1px solid transparent; transition: outline-color .2s, transform .2s; }
+.mailbox-image-picker:hover { outline-color: var(--rose); transform: scale(1.04); }
+.letter { border-color: #eadde1; }
+.letter header { color: var(--rose); }
+.toast { background: var(--ink); }
+footer { color: #8a747b; }
+footer a { color: var(--rose); font-weight: 700; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
